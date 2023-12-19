@@ -1,0 +1,836 @@
+openapi: 3.0.3
+info:
+  title: Vendor Management api
+  version: 0.0.0
+paths:
+  /api-token-auth/:
+    post:
+      operationId: api_token_auth_create
+      tags:
+      - api-token-auth
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthToken'
+          description: ''
+  /api/purchase_orders/:
+    get:
+      operationId: api_purchase_orders_list
+      description: View for creating a purchase order
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PurchaseOrder'
+          description: ''
+    post:
+      operationId: api_purchase_orders_create
+      description: View for creating a purchase order
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseOrder'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PurchaseOrder'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PurchaseOrder'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrder'
+          description: ''
+  /api/purchase_orders/{po_id}/:
+    get:
+      operationId: api_purchase_orders_retrieve
+      description: View for Retrieve, update and delete an Purchase order
+      parameters:
+      - in: path
+        name: po_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrder'
+          description: ''
+    put:
+      operationId: api_purchase_orders_update
+      description: View for Retrieve, update and delete an Purchase order
+      parameters:
+      - in: path
+        name: po_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseOrder'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PurchaseOrder'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PurchaseOrder'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrder'
+          description: ''
+    patch:
+      operationId: api_purchase_orders_partial_update
+      description: View for Retrieve, update and delete an Purchase order
+      parameters:
+      - in: path
+        name: po_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPurchaseOrder'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPurchaseOrder'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPurchaseOrder'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseOrder'
+          description: ''
+    delete:
+      operationId: api_purchase_orders_destroy
+      description: View for Retrieve, update and delete an Purchase order
+      parameters:
+      - in: path
+        name: po_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/purchase_orders/{po_id}/acknowledge/:
+    get:
+      operationId: api_purchase_orders_acknowledge_retrieve
+      parameters:
+      - in: path
+        name: po_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Acknowledge'
+          description: ''
+    put:
+      operationId: api_purchase_orders_acknowledge_update
+      parameters:
+      - in: path
+        name: po_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Acknowledge'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Acknowledge'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Acknowledge'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Acknowledge'
+          description: ''
+    patch:
+      operationId: api_purchase_orders_acknowledge_partial_update
+      parameters:
+      - in: path
+        name: po_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAcknowledge'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAcknowledge'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAcknowledge'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Acknowledge'
+          description: ''
+  /api/schema/:
+    get:
+      operationId: api_schema_retrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - yaml
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - af
+          - ar
+          - ar-dz
+          - ast
+          - az
+          - be
+          - bg
+          - bn
+          - br
+          - bs
+          - ca
+          - ckb
+          - cs
+          - cy
+          - da
+          - de
+          - dsb
+          - el
+          - en
+          - en-au
+          - en-gb
+          - eo
+          - es
+          - es-ar
+          - es-co
+          - es-mx
+          - es-ni
+          - es-ve
+          - et
+          - eu
+          - fa
+          - fi
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - he
+          - hi
+          - hr
+          - hsb
+          - hu
+          - hy
+          - ia
+          - id
+          - ig
+          - io
+          - is
+          - it
+          - ja
+          - ka
+          - kab
+          - kk
+          - km
+          - kn
+          - ko
+          - ky
+          - lb
+          - lt
+          - lv
+          - mk
+          - ml
+          - mn
+          - mr
+          - ms
+          - my
+          - nb
+          - ne
+          - nl
+          - nn
+          - os
+          - pa
+          - pl
+          - pt
+          - pt-br
+          - ro
+          - ru
+          - sk
+          - sl
+          - sq
+          - sr
+          - sr-latn
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - tk
+          - tr
+          - tt
+          - udm
+          - uk
+          - ur
+          - uz
+          - vi
+          - zh-hans
+          - zh-hant
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/vendors/:
+    get:
+      operationId: api_vendors_list
+      description: View for creating a Vendor
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Vendor'
+          description: ''
+    post:
+      operationId: api_vendors_create
+      description: View for creating a Vendor
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vendor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Vendor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Vendor'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendor'
+          description: ''
+  /api/vendors/{vendor_id}/:
+    get:
+      operationId: api_vendors_retrieve
+      description: View for Retrieve, update and delete a vendor
+      parameters:
+      - in: path
+        name: vendor_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendor'
+          description: ''
+    put:
+      operationId: api_vendors_update
+      description: View for Retrieve, update and delete a vendor
+      parameters:
+      - in: path
+        name: vendor_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vendor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Vendor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Vendor'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendor'
+          description: ''
+    patch:
+      operationId: api_vendors_partial_update
+      description: View for Retrieve, update and delete a vendor
+      parameters:
+      - in: path
+        name: vendor_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedVendor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedVendor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedVendor'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendor'
+          description: ''
+    delete:
+      operationId: api_vendors_destroy
+      description: View for Retrieve, update and delete a vendor
+      parameters:
+      - in: path
+        name: vendor_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/vendors/{vendor_id}/performance/:
+    get:
+      operationId: api_vendors_performance_retrieve
+      description: View for Retrieve Performance of a Vendor
+      parameters:
+      - in: path
+        name: vendor_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HistoricalPerformance'
+          description: ''
+  /register/:
+    post:
+      operationId: register_create
+      tags:
+      - register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Register'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Register'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Register'
+          description: ''
+components:
+  schemas:
+    Acknowledge:
+      type: object
+      properties:
+        acknowledge_date:
+          type: string
+          format: date-time
+          nullable: true
+    AuthToken:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        token:
+          type: string
+          readOnly: true
+      required:
+      - password
+      - token
+      - username
+    HistoricalPerformance:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        date:
+          type: string
+          format: date-time
+          readOnly: true
+        on_time_delivery_rate:
+          type: number
+          format: double
+        quality_rating_average:
+          type: number
+          format: double
+        average_response_time:
+          type: number
+          format: double
+        fulfillment_rate:
+          type: number
+          format: double
+        vendor:
+          type: string
+      required:
+      - date
+      - id
+      - vendor
+    PatchedAcknowledge:
+      type: object
+      properties:
+        acknowledge_date:
+          type: string
+          format: date-time
+          nullable: true
+    PatchedPurchaseOrder:
+      type: object
+      properties:
+        po_id:
+          type: string
+          readOnly: true
+        order_date:
+          type: string
+          format: date-time
+          readOnly: true
+        delivery_date:
+          type: string
+          format: date-time
+        items: {}
+        quantity:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        quality_rating:
+          type: number
+          format: double
+          nullable: true
+        issue_date:
+          type: string
+          format: date-time
+          readOnly: true
+        acknowledge_date:
+          type: string
+          format: date-time
+          nullable: true
+        vendor:
+          type: string
+    PatchedVendor:
+      type: object
+      properties:
+        vendor_id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 155
+        contact_details:
+          type: string
+        address:
+          type: string
+        on_time_delivery_rate:
+          type: number
+          format: double
+          readOnly: true
+        quality_rating_average:
+          type: number
+          format: double
+          readOnly: true
+        average_response_time:
+          type: number
+          format: double
+          readOnly: true
+        fulfillment_rate:
+          type: number
+          format: double
+          readOnly: true
+    PurchaseOrder:
+      type: object
+      properties:
+        po_id:
+          type: string
+          readOnly: true
+        order_date:
+          type: string
+          format: date-time
+          readOnly: true
+        delivery_date:
+          type: string
+          format: date-time
+        items: {}
+        quantity:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        quality_rating:
+          type: number
+          format: double
+          nullable: true
+        issue_date:
+          type: string
+          format: date-time
+          readOnly: true
+        acknowledge_date:
+          type: string
+          format: date-time
+          nullable: true
+        vendor:
+          type: string
+      required:
+      - issue_date
+      - items
+      - order_date
+      - po_id
+      - vendor
+    Register:
+      type: object
+      properties:
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        password:
+          type: string
+          writeOnly: true
+      required:
+      - email
+      - password
+      - username
+    StatusEnum:
+      enum:
+      - pending
+      - completed
+      - cancelled
+      type: string
+      description: |-
+        * `pending` - pending
+        * `completed` - completed
+        * `cancelled` - cancelled
+    Vendor:
+      type: object
+      properties:
+        vendor_id:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 155
+        contact_details:
+          type: string
+        address:
+          type: string
+        on_time_delivery_rate:
+          type: number
+          format: double
+          readOnly: true
+        quality_rating_average:
+          type: number
+          format: double
+          readOnly: true
+        average_response_time:
+          type: number
+          format: double
+          readOnly: true
+        fulfillment_rate:
+          type: number
+          format: double
+          readOnly: true
+      required:
+      - address
+      - average_response_time
+      - contact_details
+      - fulfillment_rate
+      - name
+      - on_time_delivery_rate
+      - quality_rating_average
+      - vendor_id
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
