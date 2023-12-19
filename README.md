@@ -67,6 +67,7 @@ A Vendor Management Api for managing the profiles, orders and calculates the per
 ## API EndPoints
 
 - Vendor
+
 | EndPoints | Method | Puropose |
 | ---------|:---------:| ---------|
 | /api/vendors/  | POST    |Create new vendor    |
